@@ -1,5 +1,7 @@
 package com.example.uberv.maptbookdownloader;
 
+import com.example.uberv.maptbookdownloader.models.HtmlPage;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Attributes;
 import org.jsoup.nodes.Document;
@@ -11,6 +13,12 @@ import timber.log.Timber;
 public class JsoupParser {
     public static void parse(String html, ParseCallback callback) {
         Document doc = Jsoup.parse(html);
+        // Remove "Copy to clipboard" buttons as they won't function
+        doc.select("button[class=copy-to-clipboard]").remove();
+        // TODO select all styles
+        // https://try.jsoup.org/
+        // link[ng-href][rel=stylesheet]
+        Elements styles = doc.select("link[ng-href][rel=stylesheet]");
         Elements sections = doc.getElementsByClass("section");
         String text = null;
         String nextSectionUrl = null;
@@ -29,6 +37,9 @@ public class JsoupParser {
             }
             Timber.d("found next section url");
         }
-        callback.onParseComplete(text, nextSectionUrl);
+
+        HtmlPage page = new HtmlPage(styles.toString(), sections.toString(), nextSectionUrl, null);
+
+        callback.onParseComplete(page);
     }
 }

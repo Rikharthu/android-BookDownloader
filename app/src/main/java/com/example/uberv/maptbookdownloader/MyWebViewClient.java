@@ -10,6 +10,8 @@ import timber.log.Timber;
 
 public class MyWebViewClient extends WebViewClient {
 
+    private OnPageFinishedListener mFinishedListener;
+
     @Override
     public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
         super.onReceivedHttpError(view, request, errorResponse);
@@ -26,6 +28,17 @@ public class MyWebViewClient extends WebViewClient {
     public void onPageFinished(WebView view, String url) {
         super.onPageFinished(view, url);
         Timber.d("onPageFinished() for url " + url);
+        if(mFinishedListener!=null){
+            mFinishedListener.onPageFinished(url);
+        }
 
+    }
+
+    public void setFinishedListener(OnPageFinishedListener finishedListener) {
+        mFinishedListener = finishedListener;
+    }
+
+    public interface OnPageFinishedListener {
+        void onPageFinished(String url);
     }
 }

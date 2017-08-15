@@ -1,5 +1,7 @@
 package com.example.uberv.maptbookdownloader;
 
+import com.example.uberv.maptbookdownloader.models.HtmlPage;
+
 interface ParseCallback {
-    void onParseComplete(String text, String nextSectionUrl);
+    void onParseComplete(HtmlPage page);
 }

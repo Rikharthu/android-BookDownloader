@@ -8,21 +8,26 @@
     android:orientation="vertical"
     tools:context="com.example.uberv.maptbookdownloader.MainActivity">
 
-    <TextView
+    <ProgressBar
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:max="100"
+        tools:progress="30"
+        android:id="@+id/webpage_loading_progressbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:layout_height="wrap_content"/>
     <Button
         android:text="Start"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/start_button"/>
     <Button
+        android:id="@+id/login_btn"
+        android:text="Login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <Button
         android:id="@+id/leak_btn"
+        android:text="Parse &amp; Save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <WebView
